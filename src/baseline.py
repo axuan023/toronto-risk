@@ -9,7 +9,7 @@ import pandas as pd
 # file paths
 root = Path(__file__).resolve().parent.parent
 db_path = root / "data" / "processed" / "micromorts.sqlite"
-json_path = root / "site" / "data" / "baseline.json"
+json_path = root / "docs" / "data" / "baseline.json"
 csv_path = root / "data" / "processed" / "baseline.csv"
 
 # settings

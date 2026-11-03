@@ -8,7 +8,7 @@ from scipy.stats import chi2
 
 ROOT = Path(__file__).resolve().parent.parent
 DB_PATH = ROOT / "data" / "processed" / "micromorts.sqlite"
-JSON_PATH = ROOT / "site" / "data" / "transport.json"
+JSON_PATH = ROOT / "docs" / "data" / "transport.json"
 CSV_PATH = ROOT / "data" / "processed" / "transport.csv"
 
 # Settings
@@ -16,7 +16,7 @@ YEARS = [2022, 2023, 2024, 2025]    # around the 2022/23 TTS; 2026 isn't finishe
 TTS_TABLE = "trips_to_toronto"      # trips ending in Toronto, by anyone in the TTS area
 
 # TTS only counts weekday trips. Weekends have fewer trips, so a year is worth
-# fewer than 365 weekdays. This is an assumption, so it's given as a range.
+# fewer than 365 weekdays. This is an assumption, so it's givenaef raangae.
 DAYS_PER_YEAR = {"low": 300, "mid": 330, "high": 365}
 
 # TTS rounds mode shares to whole percentages: each count could be off by 0.5% of all trips
@@ -41,7 +41,7 @@ COUNT_ONLY = {
 CONFIDENCE = 0.90
 
 
-# ---------- helpers ----------
+# helpers
 
 def poisson_range(count):
     # Exact Poisson interval for a count of rare events
@@ -74,7 +74,7 @@ def load_trips(db):
     return trips.set_index("mode")["weekday_trips"], total
 
 
-# ---------- main calculation ----------
+# main calculation
 
 def risk_per_trip(counts, trips, total_trips):
     n_years = len(YEARS)
