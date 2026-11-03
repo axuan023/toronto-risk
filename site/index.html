@@ -1,0 +1,421 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>how risky is everyday life in toronto?</title>
+    <meta name="description" content="a look at yearly mortality risk in ontario and road travel risk in toronto, using public data.">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap">
+    <script src="https://cdn.plot.ly/plotly-2.35.2.min.js"></script>
+    <style>
+        /* colours */
+        :root {
+            --bg: #131417;
+            --text: #8b91a3;
+            --strong: #f2f3f5;
+            --faint: #4a4f5c;
+            --line: #25282f;
+            --accent: #ef7a45;
+        }
+
+        body.light {
+            --bg: #f4f7f5;
+            --text: #5c6b67;
+            --strong: #1c2422;
+            --faint: #8a9894;
+            --line: #d9e2de;
+            --accent: #c9532a;
+        }
+
+        * { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            background: var(--bg);
+            color: var(--text);
+            font: 14px/1.75 'Roboto Mono', monospace;
+        }
+
+        .page { max-width: 560px; margin: auto; padding: 56px 20px 64px; }
+        h1 { font-size: 15px; color: var(--strong); font-weight: 500; }
+        h2 { font-size: 12px; color: var(--faint); font-weight: 400; margin-bottom: 12px; }
+        p { margin: 8px 0; }
+        section { margin-top: 56px; }
+        button, select { font: inherit; cursor: pointer; }
+
+        button {
+            color: var(--faint);
+            background: none;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 2px 8px;
+        }
+
+        button:hover { color: var(--strong); }
+        .top { text-align: right; margin-bottom: 40px; }
+        .stats { margin: 32px 0 0; padding: 0; list-style: none; }
+        .stats li { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; }
+        .stats li + li { border-top: 1px solid var(--line); }
+        .stats span:first-child { color: var(--strong); }
+        .number { color: var(--accent); font-weight: 500; white-space: nowrap; }
+        .controls { display: flex; gap: 20px; flex-wrap: wrap; margin: 16px 0 4px; font-size: 12px; }
+
+        select {
+            color: var(--strong);
+            background: var(--bg);
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            padding: 3px 6px;
+            margin-left: 6px;
+        }
+
+        .chart { min-height: 200px; width: 100%; margin-top: 8px; }
+        .caption { color: var(--faint); font-size: 12px; }
+        .note { border-left: 2px solid var(--accent); padding: 10px 14px; margin-top: 16px; font-size: 13px; }
+        .note strong { color: var(--strong); }
+        #error { display: none; }
+        details { margin-top: 12px; font-size: 13px; }
+        summary { cursor: pointer; color: var(--faint); }
+        table { border-collapse: collapse; width: 100%; margin-top: 8px; font-size: 13px; }
+        th { color: var(--faint); text-align: left; font-weight: 400; font-size: 12px; }
+        th, td { padding: 7px 0; border-bottom: 1px solid var(--line); }
+        td:first-child { color: var(--strong); }
+        .num { text-align: right; font-variant-numeric: tabular-nums; }
+        .limits { padding-left: 18px; }
+        .limits li { margin-top: 8px; }
+        footer { margin-top: 80px; color: var(--faint); font-size: 12px; }
+    </style>
+</head>
+
+<body>
+    <div class="page">
+        <div class="top">
+            <button id="theme-btn" aria-label="Switch light and dark">light / dark</button>
+        </div>
+
+        <main>
+            <h1>how risky is everyday life in toronto?</h1>
+            <p>one <strong>micromort</strong> is a one-in-a-million chance of dying. here's a look at yearly risk for young adults in ontario, plus a separate look at road travel in toronto.</p>
+
+            <p class="note" id="error">couldn't load the data. try running <code>python -m http.server</code> from the site folder instead of opening the html file directly.</p>
+
+            <ul class="stats">
+                <li><span>micromorts a day, ages 15–24 in ontario</span><span class="number" id="hero-day">–</span></li>
+                <li><span>walking or cycling trips per micromort</span><span class="number" id="hero-trips">–</span></li>
+                <li><span>driving trips per micromort</span><span class="number" id="hero-drive">–</span></li>
+            </ul>
+
+            <section>
+                <h2>a normal year</h2>
+                <p>how does the risk of dying in a year change with age and sex? here's how the different causes compare.</p>
+
+                <div class="controls">
+                    <label>age <select id="age-select"></select></label>
+                    <label>sex <select id="sex-select"></select></label>
+                </div>
+
+                <div id="baseline-chart" class="chart" role="img" aria-label="Mortality risk by cause"></div>
+                <p id="baseline-caption" class="caption"></p>
+
+                <p class="note">if you or someone you know is struggling, you can call or text <strong>9-8-8</strong> in canada.</p>
+
+                <details>
+                    <summary>show as a table</summary>
+                    <table id="baseline-table"></table>
+                </details>
+            </section>
+
+            <section>
+                <h2>getting around toronto</h2>
+                <p>this compares risk per trip, using road deaths and the number of trips people make.</p>
+
+                <div id="transport-chart" class="chart" role="img" aria-label="Road travel risk by mode"></div>
+                <p id="transport-caption" class="caption"></p>
+
+                <details>
+                    <summary>show as a table</summary>
+                    <table id="transport-table"></table>
+                </details>
+            </section>
+
+            <section>
+                <h2>other ways of getting around</h2>
+                <p>the survey doesn't separate these trips, so only the number of people killed or seriously injured is shown.</p>
+                <table id="counts-table"></table>
+            </section>
+
+            <section>
+                <h2>how it works</h2>
+                <p>yearly risk comes from ontario life tables (statistics canada 13-10-0837). causes are estimated using the share of deaths by cause across canada (13-10-0394).</p>
+                <p>travel risk uses toronto collision records divided by trips from the 2022 transportation tomorrow survey.</p>
+                <p>made with python, pandas, scipy, sqlite and plotly.</p>
+            </section>
+
+            <section>
+                <h2>limitations</h2>
+                <ul class="limits">
+                    <li>these are group averages, not personal predictions.</li>
+                    <li>canada-wide cause shares are applied to ontario's overall risk.</li>
+                    <li>accidents include road crashes, falls and accidental poisonings, including overdoses.</li>
+                    <li>the travel survey counts weekdays. the estimate uses 330 days of travel per year (range 300–365).</li>
+                    <li>walking and cycling are combined in the survey summary.</li>
+                    <li>trip lengths are different, so risk per trip is not the same as risk per kilometre.</li>
+                    <li>transit isn't included in this road collision comparison.</li>
+                    <li>recent serious injury records may still be incomplete.</li>
+                </ul>
+            </section>
+        </main>
+
+        <footer>for information only. not medical or safety advice.</footer>
+    </div>
+
+    <script>
+        const get = (id) => document.getElementById(id);
+        const colour = (name) => getComputedStyle(document.body).getPropertyValue(name).trim();
+
+        const fmt = (n, digits = 0) => Number(n).toLocaleString('en-CA', {
+            minimumFractionDigits: digits,
+            maximumFractionDigits: digits
+        });
+
+        const ages = { '15-24': '15–24', '25-34': '25–34' };
+        const sexes = { both: 'everyone', female: 'women', male: 'men' };
+        const chartOptions = { displayModeBar: false, responsive: true };
+
+        let baseline;
+        let transport;
+
+        // light and dark mode
+        let savedTheme = null;
+
+        try {
+            savedTheme = localStorage.getItem('risk-theme');
+        } catch (e) {}
+
+        const systemLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+
+        if (savedTheme === 'light' || (!savedTheme && systemLight)) {
+            document.body.classList.add('light');
+        }
+
+        get('theme-btn').onclick = () => {
+            const light = document.body.classList.toggle('light');
+
+            try {
+                localStorage.setItem('risk-theme', light ? 'light' : 'dark');
+            } catch (e) {}
+
+            if (baseline) drawBaseline();
+            if (transport) drawTransport();
+        };
+
+        // chart style
+        function chartLayout(title, height) {
+            return {
+                height: height,
+                margin: { l: 10, r: 16, t: 8, b: 44 },
+                paper_bgcolor: 'rgba(0,0,0,0)',
+                plot_bgcolor: 'rgba(0,0,0,0)',
+                font: {
+                    family: 'Roboto Mono, monospace',
+                    color: colour('--text'),
+                    size: 12
+                },
+                hoverlabel: {
+                    bgcolor: colour('--bg'),
+                    font: { color: colour('--strong') }
+                },
+                xaxis: {
+                    title: {
+                        text: title,
+                        font: { size: 11, color: colour('--faint') }
+                    },
+                    gridcolor: colour('--line'),
+                    zeroline: false,
+                    fixedrange: true
+                },
+                yaxis: {
+                    automargin: true,
+                    fixedrange: true,
+                    tickfont: { color: colour('--strong') }
+                }
+            };
+        }
+
+        // yearly risk chart
+        function drawBaseline() {
+            const age = get('age-select').value;
+            const sex = get('sex-select').value;
+            const group = baseline.groups.find(g => g.age_band === age && g.sex === sex);
+
+            if (!group) return;
+
+            const shown = group.causes.filter(c => c.deaths > 0);
+            const rows = [...shown].reverse();
+
+            const trace = {
+                type: 'bar',
+                orientation: 'h',
+                x: rows.map(c => c.micromorts),
+                y: rows.map(c => c.cause.toLowerCase()),
+                marker: { color: colour('--accent') },
+                customdata: rows.map(c => [
+                    (c.share * 100).toFixed(1),
+                    c.sensitive ? '<br>support: call or text 9-8-8' : ''
+                ]),
+                hovertemplate: '<b>%{y}</b><br>%{x:.0f} micromorts a year' +
+                    '<br>%{customdata[0]}% of deaths%{customdata[1]}<extra></extra>'
+            };
+
+            Plotly.react(
+                'baseline-chart',
+                [trace],
+                chartLayout('micromorts per year', 56 + rows.length * 30),
+                chartOptions
+            );
+
+            get('baseline-caption').textContent =
+                `${sexes[sex]}, ages ${ages[age] || age}: about ${fmt(group.micromorts_per_year)} micromorts a year ` +
+                `(range ${fmt(group.range[0])}–${fmt(group.range[1])}), or ${fmt(group.micromorts_per_day, 1)} a day. ` +
+                `${baseline.years[0]}–${baseline.years.at(-1)}.`;
+
+            const html = shown.map(c =>
+                `<tr><td>${c.cause.toLowerCase()}</td><td class="num">${fmt(c.micromorts)}</td>` +
+                `<td class="num">${(c.share * 100).toFixed(1)}%</td></tr>`
+            ).join('');
+
+            get('baseline-table').innerHTML =
+                '<tr><th>cause</th><th class="num">micromorts / year</th><th class="num">share</th></tr>' + html;
+        }
+
+        // road travel chart
+        function drawTransport() {
+            const rows = transport.per_trip
+                .filter(r => r.outcome === 'killed')
+                .sort((a, b) => a.micromorts_per_trip - b.micromorts_per_trip);
+
+            const trace = {
+                type: 'bar',
+                orientation: 'h',
+                x: rows.map(r => r.micromorts_per_trip),
+                y: rows.map(r => r.label.toLowerCase()),
+                marker: { color: colour('--accent') },
+                error_x: {
+                    type: 'data',
+                    symmetric: false,
+                    array: rows.map(r => r.high - r.micromorts_per_trip),
+                    arrayminus: rows.map(r => r.micromorts_per_trip - r.low),
+                    color: colour('--strong'),
+                    thickness: 1.5,
+                    width: 5
+                },
+                customdata: rows.map(r => [
+                    fmt(r.trips_per_micromort),
+                    r.low.toFixed(3),
+                    r.high.toFixed(3),
+                    r.events
+                ]),
+                hovertemplate: '<b>%{y}</b><br>%{x:.3f} micromorts per trip' +
+                    '<br>range %{customdata[1]}–%{customdata[2]}' +
+                    '<br>1 micromort every %{customdata[0]} trips' +
+                    '<br>%{customdata[3]} people killed<extra></extra>'
+            };
+
+            const title = `micromorts per trip (${Math.round(transport.confidence * 100)}% range)`;
+
+            Plotly.react(
+                'transport-chart',
+                [trace],
+                chartLayout(title, 56 + rows.length * 48),
+                chartOptions
+            );
+
+            const walk = rows.find(r => r.mode === 'walk_cycle');
+            const drive = rows.find(r => r.mode === 'driver');
+
+            if (walk) {
+                get('hero-trips').textContent = fmt(walk.trips_per_micromort);
+            }
+
+            if (drive) {
+                get('hero-drive').textContent = fmt(drive.trips_per_micromort);
+            }
+
+            if (walk && drive && drive.micromorts_per_trip > 0) {
+                const ratio = walk.micromorts_per_trip / drive.micromorts_per_trip;
+
+                get('transport-caption').textContent =
+                    `per trip, walking or cycling is about ${fmt(ratio)}× as risky as driving. ` +
+                    `people killed on toronto roads, ${transport.years[0]}–${transport.years.at(-1)}.`;
+            }
+
+            const table = rows.map(r =>
+                `<tr><td>${r.label.toLowerCase()}</td><td class="num">${r.micromorts_per_trip.toFixed(3)}</td>` +
+                `<td class="num">${r.low.toFixed(3)}–${r.high.toFixed(3)}</td>` +
+                `<td class="num">${fmt(r.trips_per_micromort)}</td><td class="num">${r.events}</td></tr>`
+            ).join('');
+
+            get('transport-table').innerHTML =
+                '<tr><th>mode</th><th class="num">per trip</th><th class="num">range</th>' +
+                '<th class="num">trips / micromort</th><th class="num">killed</th></tr>' + table;
+
+            const counts = transport.counts_only.map(c =>
+                `<tr><td>${c.label.toLowerCase()}</td><td class="num">${c.killed}</td>` +
+                `<td class="num">${fmt(c.seriously_injured)}</td></tr>`
+            ).join('');
+
+            get('counts-table').innerHTML =
+                '<tr><th>mode</th><th class="num">killed</th><th class="num">seriously injured</th></tr>' + counts;
+        }
+
+        // load the two data files
+        async function loadData() {
+            try {
+                const a = await fetch('data/baseline.json');
+                const b = await fetch('data/transport.json');
+
+                if (!a.ok || !b.ok) {
+                    throw new Error('Missing data file');
+                }
+
+                baseline = await a.json();
+                transport = await b.json();
+
+                const ageList = [...new Set(baseline.groups.map(g => g.age_band))];
+                const sexList = ['both', 'female', 'male'].filter(
+                    s => baseline.groups.some(g => g.sex === s)
+                );
+
+                get('age-select').innerHTML = ageList.map(
+                    a => `<option value="${a}">${ages[a] || a}</option>`
+                ).join('');
+
+                get('sex-select').innerHTML = sexList.map(
+                    s => `<option value="${s}">${sexes[s]}</option>`
+                ).join('');
+
+                get('age-select').onchange = drawBaseline;
+                get('sex-select').onchange = drawBaseline;
+
+                const young = baseline.groups.find(
+                    g => g.age_band === '15-24' && g.sex === 'both'
+                );
+
+                if (young) {
+                    get('hero-day').textContent = fmt(young.micromorts_per_day, 1);
+                }
+
+                drawBaseline();
+                drawTransport();
+
+            } catch (err) {
+                console.error(err);
+                get('error').style.display = 'block';
+            }
+        }
+
+        loadData();
+    </script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+table,mode,share_pct,weekday_trips,median_trip_km
+trips_to_toronto,driver,42,2382200,5.4
+trips_to_toronto,passenger,13,737300,3.6
+trips_to_toronto,transit,18,1020900,6.0
+trips_to_toronto,go_train,1,56700,29.3
+trips_to_toronto,walk_cycle,24,1361300,
+trips_to_toronto,other,3,170200,
+trips_by_residents,driver,42,2290800,5.0
+trips_by_residents,passenger,13,709100,3.5
+trips_by_residents,transit,18,981800,5.8
+trips_by_residents,go_train,0,0,16.7
+trips_by_residents,walk_cycle,24,1309100,
+trips_by_residents,other,3,163600,

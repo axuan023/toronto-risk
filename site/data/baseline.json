@@ -1,0 +1,464 @@
+{
+  "unit": "micromorts per year (1 micromort = 1-in-a-million chance of dying)",
+  "years": [
+    2022,
+    2023,
+    2024
+  ],
+  "total_source": "Statistics Canada Table 13-10-0837, Ontario, death probability (qx)",
+  "cause_source": "Statistics Canada Table 13-10-0394, Canada, number of deaths",
+  "range_note": "Range uses StatCan's margin of error for qx (95% level)",
+  "method": "Ontario total risk split by each cause's share of deaths in Canada",
+  "groups": [
+    {
+      "age_band": "15-24",
+      "sex": "both",
+      "micromorts_per_year": 386.5,
+      "range": [
+        370.8,
+        402.3
+      ],
+      "micromorts_per_day": 1.06,
+      "causes": [
+        {
+          "cause": "Accidents (incl. road, falls, poisoning)",
+          "micromorts": 136.9,
+          "share": 0.3542,
+          "deaths": 2475,
+          "sensitive": false
+        },
+        {
+          "cause": "Suicide",
+          "micromorts": 71.2,
+          "share": 0.1842,
+          "deaths": 1287,
+          "sensitive": true
+        },
+        {
+          "cause": "Cancer",
+          "micromorts": 21.5,
+          "share": 0.0555,
+          "deaths": 388,
+          "sensitive": false
+        },
+        {
+          "cause": "Homicide",
+          "micromorts": 12.6,
+          "share": 0.0325,
+          "deaths": 227,
+          "sensitive": false
+        },
+        {
+          "cause": "Heart disease",
+          "micromorts": 7.0,
+          "share": 0.0182,
+          "deaths": 127,
+          "sensitive": false
+        },
+        {
+          "cause": "Congenital conditions",
+          "micromorts": 5.8,
+          "share": 0.0149,
+          "deaths": 104,
+          "sensitive": false
+        },
+        {
+          "cause": "Diabetes mellitus",
+          "micromorts": 2.8,
+          "share": 0.0073,
+          "deaths": 51,
+          "sensitive": false
+        },
+        {
+          "cause": "Flu and pneumonia",
+          "micromorts": 2.8,
+          "share": 0.0072,
+          "deaths": 50,
+          "sensitive": false
+        },
+        {
+          "cause": "All other causes",
+          "micromorts": 126.0,
+          "share": 0.326,
+          "deaths": 2278,
+          "sensitive": false
+        }
+      ]
+    },
+    {
+      "age_band": "15-24",
+      "sex": "female",
+      "micromorts_per_year": 256.3,
+      "range": [
+        237.9,
+        274.7
+      ],
+      "micromorts_per_day": 0.7,
+      "causes": [
+        {
+          "cause": "Accidents (incl. road, falls, poisoning)",
+          "micromorts": 84.7,
+          "share": 0.3303,
+          "deaths": 804,
+          "sensitive": false
+        },
+        {
+          "cause": "Suicide",
+          "micromorts": 46.0,
+          "share": 0.1795,
+          "deaths": 437,
+          "sensitive": true
+        },
+        {
+          "cause": "Cancer",
+          "micromorts": 18.2,
+          "share": 0.0711,
+          "deaths": 173,
+          "sensitive": false
+        },
+        {
+          "cause": "Heart disease",
+          "micromorts": 4.7,
+          "share": 0.0185,
+          "deaths": 45,
+          "sensitive": false
+        },
+        {
+          "cause": "Homicide",
+          "micromorts": 4.4,
+          "share": 0.0173,
+          "deaths": 42,
+          "sensitive": false
+        },
+        {
+          "cause": "Congenital conditions",
+          "micromorts": 4.3,
+          "share": 0.0168,
+          "deaths": 41,
+          "sensitive": false
+        },
+        {
+          "cause": "Flu and pneumonia",
+          "micromorts": 2.7,
+          "share": 0.0107,
+          "deaths": 26,
+          "sensitive": false
+        },
+        {
+          "cause": "Diabetes mellitus",
+          "micromorts": 1.9,
+          "share": 0.0074,
+          "deaths": 18,
+          "sensitive": false
+        },
+        {
+          "cause": "All other causes",
+          "micromorts": 89.3,
+          "share": 0.3484,
+          "deaths": 848,
+          "sensitive": false
+        }
+      ]
+    },
+    {
+      "age_band": "15-24",
+      "sex": "male",
+      "micromorts_per_year": 499.1,
+      "range": [
+        474.5,
+        523.7
+      ],
+      "micromorts_per_day": 1.37,
+      "causes": [
+        {
+          "cause": "Accidents (incl. road, falls, poisoning)",
+          "micromorts": 183.2,
+          "share": 0.367,
+          "deaths": 1671,
+          "sensitive": false
+        },
+        {
+          "cause": "Suicide",
+          "micromorts": 93.2,
+          "share": 0.1867,
+          "deaths": 850,
+          "sensitive": true
+        },
+        {
+          "cause": "Cancer",
+          "micromorts": 23.6,
+          "share": 0.0472,
+          "deaths": 215,
+          "sensitive": false
+        },
+        {
+          "cause": "Homicide",
+          "micromorts": 20.3,
+          "share": 0.0406,
+          "deaths": 185,
+          "sensitive": false
+        },
+        {
+          "cause": "Heart disease",
+          "micromorts": 9.0,
+          "share": 0.018,
+          "deaths": 82,
+          "sensitive": false
+        },
+        {
+          "cause": "Congenital conditions",
+          "micromorts": 6.9,
+          "share": 0.0138,
+          "deaths": 63,
+          "sensitive": false
+        },
+        {
+          "cause": "Diabetes mellitus",
+          "micromorts": 3.6,
+          "share": 0.0072,
+          "deaths": 33,
+          "sensitive": false
+        },
+        {
+          "cause": "Flu and pneumonia",
+          "micromorts": 2.6,
+          "share": 0.0053,
+          "deaths": 24,
+          "sensitive": false
+        },
+        {
+          "cause": "All other causes",
+          "micromorts": 156.8,
+          "share": 0.3141,
+          "deaths": 1430,
+          "sensitive": false
+        }
+      ]
+    },
+    {
+      "age_band": "25-34",
+      "sex": "both",
+      "micromorts_per_year": 747.6,
+      "range": [
+        727.6,
+        767.7
+      ],
+      "micromorts_per_day": 2.05,
+      "causes": [
+        {
+          "cause": "Accidents (incl. road, falls, poisoning)",
+          "micromorts": 289.1,
+          "share": 0.3867,
+          "deaths": 6125,
+          "sensitive": false
+        },
+        {
+          "cause": "Suicide",
+          "micromorts": 93.9,
+          "share": 0.1256,
+          "deaths": 1989,
+          "sensitive": true
+        },
+        {
+          "cause": "Cancer",
+          "micromorts": 51.4,
+          "share": 0.0687,
+          "deaths": 1088,
+          "sensitive": false
+        },
+        {
+          "cause": "Heart disease",
+          "micromorts": 23.5,
+          "share": 0.0314,
+          "deaths": 497,
+          "sensitive": false
+        },
+        {
+          "cause": "Homicide",
+          "micromorts": 15.7,
+          "share": 0.021,
+          "deaths": 332,
+          "sensitive": false
+        },
+        {
+          "cause": "Chronic liver disease and cirrhosis",
+          "micromorts": 14.8,
+          "share": 0.0198,
+          "deaths": 314,
+          "sensitive": false
+        },
+        {
+          "cause": "Diabetes mellitus",
+          "micromorts": 7.7,
+          "share": 0.0104,
+          "deaths": 164,
+          "sensitive": false
+        },
+        {
+          "cause": "Flu and pneumonia",
+          "micromorts": 6.3,
+          "share": 0.0085,
+          "deaths": 134,
+          "sensitive": false
+        },
+        {
+          "cause": "All other causes",
+          "micromorts": 245.3,
+          "share": 0.3281,
+          "deaths": 5196,
+          "sensitive": false
+        }
+      ]
+    },
+    {
+      "age_band": "25-34",
+      "sex": "female",
+      "micromorts_per_year": 481.9,
+      "range": [
+        458.7,
+        505.1
+      ],
+      "micromorts_per_day": 1.32,
+      "causes": [
+        {
+          "cause": "Accidents (incl. road, falls, poisoning)",
+          "micromorts": 162.2,
+          "share": 0.3365,
+          "deaths": 1723,
+          "sensitive": false
+        },
+        {
+          "cause": "Cancer",
+          "micromorts": 52.0,
+          "share": 0.108,
+          "deaths": 553,
+          "sensitive": false
+        },
+        {
+          "cause": "Suicide",
+          "micromorts": 50.4,
+          "share": 0.1045,
+          "deaths": 535,
+          "sensitive": true
+        },
+        {
+          "cause": "Heart disease",
+          "micromorts": 15.9,
+          "share": 0.033,
+          "deaths": 169,
+          "sensitive": false
+        },
+        {
+          "cause": "Chronic liver disease and cirrhosis",
+          "micromorts": 13.6,
+          "share": 0.0283,
+          "deaths": 145,
+          "sensitive": false
+        },
+        {
+          "cause": "Pregnancy and childbirth",
+          "micromorts": 5.6,
+          "share": 0.0115,
+          "deaths": 59,
+          "sensitive": false
+        },
+        {
+          "cause": "Homicide",
+          "micromorts": 5.6,
+          "share": 0.0115,
+          "deaths": 59,
+          "sensitive": false
+        },
+        {
+          "cause": "Flu and pneumonia",
+          "micromorts": 5.4,
+          "share": 0.0111,
+          "deaths": 57,
+          "sensitive": false
+        },
+        {
+          "cause": "All other causes",
+          "micromorts": 171.3,
+          "share": 0.3555,
+          "deaths": 1820,
+          "sensitive": false
+        }
+      ]
+    },
+    {
+      "age_band": "25-34",
+      "sex": "male",
+      "micromorts_per_year": 991.7,
+      "range": [
+        959.8,
+        1023.6
+      ],
+      "micromorts_per_day": 2.72,
+      "causes": [
+        {
+          "cause": "Accidents (incl. road, falls, poisoning)",
+          "micromorts": 407.3,
+          "share": 0.4107,
+          "deaths": 4402,
+          "sensitive": false
+        },
+        {
+          "cause": "Suicide",
+          "micromorts": 134.5,
+          "share": 0.1356,
+          "deaths": 1454,
+          "sensitive": true
+        },
+        {
+          "cause": "Cancer",
+          "micromorts": 49.5,
+          "share": 0.0499,
+          "deaths": 535,
+          "sensitive": false
+        },
+        {
+          "cause": "Heart disease",
+          "micromorts": 30.3,
+          "share": 0.0306,
+          "deaths": 328,
+          "sensitive": false
+        },
+        {
+          "cause": "Homicide",
+          "micromorts": 25.3,
+          "share": 0.0255,
+          "deaths": 273,
+          "sensitive": false
+        },
+        {
+          "cause": "Chronic liver disease and cirrhosis",
+          "micromorts": 15.6,
+          "share": 0.0158,
+          "deaths": 169,
+          "sensitive": false
+        },
+        {
+          "cause": "Diabetes mellitus",
+          "micromorts": 10.1,
+          "share": 0.0102,
+          "deaths": 109,
+          "sensitive": false
+        },
+        {
+          "cause": "Flu and pneumonia",
+          "micromorts": 7.1,
+          "share": 0.0072,
+          "deaths": 77,
+          "sensitive": false
+        },
+        {
+          "cause": "All other causes",
+          "micromorts": 312.0,
+          "share": 0.3146,
+          "deaths": 3372,
+          "sensitive": false
+        }
+      ]
+    }
+  ]
+}

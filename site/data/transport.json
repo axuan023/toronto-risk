@@ -1,0 +1,129 @@
+{
+  "unit": "micromorts per trip (1 micromort = 1-in-a-million chance of dying)",
+  "years": [
+    2022,
+    2023,
+    2024,
+    2025
+  ],
+  "confidence": 0.9,
+  "trip_source": "2022 Transportation Tomorrow Survey, trips_to_toronto, 24-hour weekday trips",
+  "event_source": "City of Toronto, Motor Vehicle Collisions with KSI Data",
+  "assumptions": {
+    "days_per_year": {
+      "low": 300,
+      "mid": 330,
+      "high": 365
+    },
+    "tts_share_rounding": 0.005
+  },
+  "notes": [
+    "Walking and cycling are combined because the TTS summary combines them.",
+    "Transit isn't included: the KSI data covers road collisions only.",
+    "'ksi' means killed or seriously injured."
+  ],
+  "per_trip": [
+    {
+      "mode": "driver",
+      "label": "Driving",
+      "outcome": "killed",
+      "events": 36,
+      "events_per_year": 9.0,
+      "weekday_trips": 2382200,
+      "micromorts_per_trip": 0.0114,
+      "low": 0.0076,
+      "high": 0.0168,
+      "trips_per_micromort": 87
+    },
+    {
+      "mode": "driver",
+      "label": "Driving",
+      "outcome": "ksi",
+      "events": 271,
+      "events_per_year": 67.8,
+      "weekday_trips": 2382200,
+      "micromorts_per_trip": 0.0862,
+      "low": 0.0695,
+      "high": 0.1061,
+      "trips_per_micromort": 12
+    },
+    {
+      "mode": "passenger",
+      "label": "Car passenger",
+      "outcome": "killed",
+      "events": 17,
+      "events_per_year": 4.2,
+      "weekday_trips": 737300,
+      "micromorts_per_trip": 0.0175,
+      "low": 0.0097,
+      "high": 0.03,
+      "trips_per_micromort": 57
+    },
+    {
+      "mode": "passenger",
+      "label": "Car passenger",
+      "outcome": "ksi",
+      "events": 105,
+      "events_per_year": 26.2,
+      "weekday_trips": 737300,
+      "micromorts_per_trip": 0.1079,
+      "low": 0.0793,
+      "high": 0.1452,
+      "trips_per_micromort": 9
+    },
+    {
+      "mode": "walk_cycle",
+      "label": "Walking or cycling",
+      "outcome": "killed",
+      "events": 106,
+      "events_per_year": 26.5,
+      "weekday_trips": 1361300,
+      "micromorts_per_trip": 0.059,
+      "low": 0.0442,
+      "high": 0.0779,
+      "trips_per_micromort": 17
+    },
+    {
+      "mode": "walk_cycle",
+      "label": "Walking or cycling",
+      "outcome": "ksi",
+      "events": 695,
+      "events_per_year": 173.8,
+      "weekday_trips": 1361300,
+      "micromorts_per_trip": 0.3868,
+      "low": 0.3214,
+      "high": 0.4627,
+      "trips_per_micromort": 3
+    }
+  ],
+  "counts_only": [
+    {
+      "mode": "walk",
+      "label": "Walking",
+      "killed": 94,
+      "seriously_injured": 444,
+      "killed_per_year": 23.5
+    },
+    {
+      "mode": "cycle",
+      "label": "Cycling",
+      "killed": 12,
+      "seriously_injured": 145,
+      "killed_per_year": 3.0
+    },
+    {
+      "mode": "motorcycle",
+      "label": "Motorcycle",
+      "killed": 24,
+      "seriously_injured": 140,
+      "killed_per_year": 6.0
+    },
+    {
+      "mode": "micromobility",
+      "label": "E-scooter / micromobility",
+      "killed": 2,
+      "seriously_injured": 13,
+      "killed_per_year": 0.5
+    }
+  ]
+}

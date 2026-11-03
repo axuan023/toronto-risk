@@ -1,0 +1,16 @@
+# raw data is downloaded by scripts
+data/raw/
+*.sqlite
+*.db
+
+# source PDFs (not ours to republish)
+*.pdf
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
